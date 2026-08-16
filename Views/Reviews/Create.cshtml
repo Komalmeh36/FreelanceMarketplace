@@ -1,0 +1,214 @@
+@model freelanceMarketplace.Models.Review
+
+@{
+    ViewData["Title"] = "Leave Review";
+}
+
+<style>
+    body {
+        background-color: #f3f3f3;
+    }
+
+    .review-page {
+        padding: 45px 0 60px 0;
+    }
+
+    .review-card {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 35px;
+        max-width: 850px;
+        margin: 0 auto;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.09);
+    }
+
+    .review-header {
+        margin-bottom: 28px;
+    }
+
+    .review-header h2 {
+        margin: 0;
+        font-weight: 600;
+        color: #222;
+    }
+
+    .review-header p {
+        margin: 7px 0 0 0;
+        color: #666;
+    }
+
+    .form-section {
+        margin-bottom: 22px;
+    }
+
+    .form-section label {
+        display: block;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    .review-input {
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    .review-input:focus {
+        border-color: #555;
+        box-shadow: 0 0 0 0.15rem rgba(50, 50, 50, 0.12);
+    }
+
+    .rating-select {
+        height: 44px;
+    }
+
+    .comment-box {
+        min-height: 130px;
+        resize: vertical;
+    }
+
+    .review-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 5px;
+    }
+
+    .submit-btn {
+        background-color: #333;
+        border: 1px solid #333;
+        color: white;
+        padding: 9px 18px;
+        border-radius: 6px;
+    }
+
+    .submit-btn:hover {
+        background-color: #222;
+        border-color: #222;
+        color: white;
+    }
+
+    .cancel-btn {
+        background-color: #e5e5e5;
+        border: 1px solid #d0d0d0;
+        color: #222;
+        padding: 9px 18px;
+        border-radius: 6px;
+        text-decoration: none;
+    }
+
+    .cancel-btn:hover {
+        background-color: #d5d5d5;
+        border-color: #c5c5c5;
+        color: #111;
+    }
+</style>
+
+
+<div class="review-page">
+
+    <div class="review-card">
+
+        <!-- Header -->
+
+        <div class="review-header">
+
+            <h2>
+                Leave a Review
+            </h2>
+
+            <p>
+                Share your experience with this freelance service
+            </p>
+
+        </div>
+
+
+        <!-- Review Form -->
+
+        <form asp-action="Create" method="post">
+
+            <input type="hidden"
+                   asp-for="GigId"
+                   value="@ViewBag.GigId" />
+
+
+            <!-- Rating -->
+
+            <div class="form-section">
+
+                <label for="Rating">
+                    Rating
+                </label>
+
+                <select asp-for="Rating"
+                        id="Rating"
+                        class="form-control review-input rating-select">
+
+                    <option value="">
+                        Select a rating
+                    </option>
+
+                    <option value="1">
+                        1 - Poor
+                    </option>
+
+                    <option value="2">
+                        2 - Fair
+                    </option>
+
+                    <option value="3">
+                        3 - Good
+                    </option>
+
+                    <option value="4">
+                        4 - Very Good
+                    </option>
+
+                    <option value="5">
+                        5 - Excellent
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Comment -->
+
+            <div class="form-section">
+
+                <label for="Comment">
+                    Comment
+                </label>
+
+                <textarea asp-for="Comment"
+                          id="Comment"
+                          class="form-control review-input comment-box"
+                          rows="5"
+                          placeholder="Write your review here..."></textarea>
+
+            </div>
+
+
+            <!-- Actions -->
+
+            <div class="review-actions">
+
+                <button type="submit"
+                        class="submit-btn">
+                    Submit Review
+                </button>
+
+                <a href="/Orders/MyOrders"
+                   class="cancel-btn">
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

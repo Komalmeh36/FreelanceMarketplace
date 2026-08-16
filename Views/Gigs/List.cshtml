@@ -1,0 +1,502 @@
+@model IEnumerable<freelanceMarketplace.Models.Gig>
+
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "All Gigs";
+    var userRole = Context.Session.GetString("UserRole");
+}
+
+<style>
+    body {
+        background-color: #f3f3f3;
+    }
+
+    .gigs-page {
+        padding: 35px 0 50px 0;
+    }
+
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 28px;
+    }
+
+    .page-header h2 {
+        margin: 0;
+        font-weight: 600;
+        color: #222;
+    }
+
+    .page-header p {
+        margin: 6px 0 0 0;
+        color: #666;
+    }
+
+    .create-gig-btn {
+        background-color: #222;
+        border-color: #222;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 6px;
+    }
+
+    .create-gig-btn:hover {
+        background-color: #111;
+        border-color: #111;
+        color: white;
+    }
+
+    .message-box {
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .search-card {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .search-card label {
+        display: block;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    .search-input {
+        border: 1px solid #ccc;
+        border-radius: 6px 0 0 6px;
+        height: 44px;
+    }
+
+    .search-input:focus {
+        border-color: #555;
+        box-shadow: 0 0 0 0.15rem rgba(50, 50, 50, 0.12);
+    }
+
+    .search-btn {
+        background-color: #333;
+        border-color: #333;
+        color: white;
+        padding: 0 22px;
+    }
+
+    .search-btn:hover {
+        background-color: #222;
+        border-color: #222;
+        color: white;
+    }
+
+    .clear-btn {
+        background-color: #e5e5e5;
+        border-color: #d0d0d0;
+        color: #222;
+        padding: 0 20px;
+    }
+
+    .clear-btn:hover {
+        background-color: #d5d5d5;
+        border-color: #c5c5c5;
+        color: #111;
+    }
+
+    .gigs-card {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
+    }
+
+    .gigs-table {
+        margin-bottom: 0;
+    }
+
+    .gigs-table thead {
+        background-color: #292929;
+        color: white;
+    }
+
+    .gigs-table thead th {
+        padding: 15px;
+        font-weight: 600;
+        border: none;
+        white-space: nowrap;
+    }
+
+    .gigs-table tbody td {
+        padding: 16px 15px;
+        vertical-align: middle;
+        color: #333;
+        border-color: #e0e0e0;
+    }
+
+    .gigs-table tbody tr:hover {
+        background-color: #f7f7f7;
+    }
+
+    .gig-title {
+        font-weight: 600;
+        color: #222;
+    }
+
+    .gig-title-link {
+        font-weight: 600;
+        color: #222;
+        text-decoration: none;
+    }
+
+    .gig-title-link:hover {
+        color: #555;
+        text-decoration: underline;
+    }
+
+    .gig-description {
+        color: #666;
+        max-width: 400px;
+    }
+
+    .gig-price {
+        font-weight: 600;
+        color: #222;
+        white-space: nowrap;
+    }
+
+    .action-btn {
+        margin-right: 5px;
+        margin-bottom: 4px;
+        border-radius: 5px;
+        padding: 6px 12px;
+    }
+
+    .details-btn {
+        background-color: #292929;
+        border-color: #292929;
+        color: white;
+    }
+
+    .details-btn:hover {
+        background-color: #111;
+        border-color: #111;
+        color: white;
+    }
+
+    .edit-btn {
+        background-color: #e5e5e5;
+        border-color: #d0d0d0;
+        color: #222;
+    }
+
+    .edit-btn:hover {
+        background-color: #d2d2d2;
+        border-color: #c0c0c0;
+        color: #111;
+    }
+
+    .delete-btn {
+        background-color: #333;
+        border-color: #333;
+        color: white;
+    }
+
+    .delete-btn:hover {
+        background-color: #1f1f1f;
+        border-color: #1f1f1f;
+        color: white;
+    }
+
+    .order-btn {
+        background-color: #555;
+        border-color: #555;
+        color: white;
+    }
+
+    .order-btn:hover {
+        background-color: #3d3d3d;
+        border-color: #3d3d3d;
+        color: white;
+    }
+
+    .empty-state {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 45px 20px;
+        text-align: center;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .empty-state h4 {
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    .empty-state p {
+        color: #777;
+        margin-bottom: 0;
+    }
+</style>
+
+
+<div class="gigs-page">
+
+    <!-- Page Header -->
+
+    <div class="page-header">
+
+        <div>
+
+            <h2>
+                All Gigs
+            </h2>
+
+            <p>
+                Browse available freelance services
+            </p>
+
+        </div>
+
+
+        @if (userRole == "Seller")
+        {
+            <a href="/Gigs/Create"
+               class="btn create-gig-btn">
+
+                Create New Gig
+
+            </a>
+        }
+
+    </div>
+
+
+    <!-- Error Message -->
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger message-box">
+
+            @TempData["Error"]
+
+        </div>
+    }
+
+
+    <!-- Success Message -->
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success message-box">
+
+            @TempData["Success"]
+
+        </div>
+    }
+
+
+    <!-- Search -->
+
+    <div class="search-card">
+
+        <form method="get"
+              action="/Gigs/List">
+
+            <label for="searchTerm">
+                Search Gigs
+            </label>
+
+            <div class="input-group">
+
+                <input type="text"
+                       id="searchTerm"
+                       name="searchTerm"
+                       class="form-control search-input"
+                       placeholder="Search by gig title or description..."
+                       value="@ViewBag.SearchTerm" />
+
+                <button type="submit"
+                        class="btn search-btn">
+
+                    Search
+
+                </button>
+
+                <a href="/Gigs/List"
+                   class="btn clear-btn">
+
+                    Clear
+
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- Gigs -->
+
+    @if (!Model.Any())
+    {
+        <div class="empty-state">
+
+            <h4>
+                No Gigs Found
+            </h4>
+
+            <p>
+                No gigs matched your search.
+                Try another search term.
+            </p>
+
+        </div>
+    }
+    else
+    {
+        <div class="gigs-card">
+
+            <div class="table-responsive">
+
+                <table class="table gigs-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Title
+                            </th>
+
+                            <th>
+                                Description
+                            </th>
+
+                            <th>
+                                Price
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        @foreach (var gig in Model)
+                        {
+                            <tr>
+
+                                <!-- Gig Title -->
+
+                                <td>
+
+                                    <a href="/Gigs/Details/@gig.Id"
+                                       class="gig-title-link">
+
+                                        @gig.Title
+
+                                    </a>
+
+                                </td>
+
+
+                                <!-- Description -->
+
+                                <td>
+
+                                    <span class="gig-description">
+
+                                        @gig.Description
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Price -->
+
+                                <td>
+
+                                    <span class="gig-price">
+
+                                        @gig.Price
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Actions -->
+
+                                <td>
+
+                                    <!-- Everyone can view details -->
+
+                                    <a href="/Gigs/Details/@gig.Id"
+                                       class="btn btn-sm action-btn details-btn">
+
+                                        View Details
+
+                                    </a>
+
+
+                                    <!-- Seller Actions -->
+
+                                    @if (userRole == "Seller")
+                                    {
+                                        <a href="/Gigs/Edit/@gig.Id"
+                                           class="btn btn-sm action-btn edit-btn">
+
+                                            Edit
+
+                                        </a>
+
+                                        <a href="/Gigs/Delete/@gig.Id"
+                                           class="btn btn-sm action-btn delete-btn">
+
+                                            Delete
+
+                                        </a>
+                                    }
+
+
+                                    <!-- Buyer Action -->
+
+                                    @if (userRole == "Buyer")
+                                    {
+                                        <a href="/Orders/Create/@gig.Id"
+                                           class="btn btn-sm action-btn order-btn">
+
+                                            Place Order
+
+                                        </a>
+                                    }
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    }
+
+</div>

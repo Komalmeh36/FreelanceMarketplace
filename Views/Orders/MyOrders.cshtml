@@ -1,0 +1,298 @@
+@model IEnumerable<freelanceMarketplace.Models.Order>
+
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+<style>
+    body {
+        background-color: #f3f3f3;
+    }
+
+    .orders-page {
+        padding: 35px 0 50px 0;
+    }
+
+    .page-header {
+        margin-bottom: 28px;
+    }
+
+    .page-header h2 {
+        margin: 0;
+        font-weight: 600;
+        color: #222;
+    }
+
+    .page-header p {
+        margin: 6px 0 0 0;
+        color: #666;
+    }
+
+    .orders-card {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
+    }
+
+    .orders-table {
+        margin-bottom: 0;
+    }
+
+    .orders-table thead {
+        background-color: #292929;
+        color: white;
+    }
+
+    .orders-table thead th {
+        padding: 15px;
+        font-weight: 600;
+        border: none;
+        white-space: nowrap;
+    }
+
+    .orders-table tbody td {
+        padding: 16px 15px;
+        vertical-align: middle;
+        color: #333;
+        border-color: #e0e0e0;
+    }
+
+    .orders-table tbody tr:hover {
+        background-color: #f7f7f7;
+    }
+
+    .order-id {
+        font-weight: 600;
+        color: #222;
+    }
+
+    .gig-name {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .buyer-name {
+        color: #555;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 6px 11px;
+        border-radius: 5px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .status-pending {
+        background-color: #e5e5e5;
+        color: #222;
+    }
+
+    .status-completed {
+        background-color: #333;
+        color: white;
+    }
+
+    .status-cancelled {
+        background-color: #cfcfcf;
+        color: #222;
+    }
+
+    .review-btn {
+        background-color: #333;
+        border: 1px solid #333;
+        color: white;
+        padding: 7px 13px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .review-btn:hover {
+        background-color: #222;
+        border-color: #222;
+        color: white;
+    }
+
+    .not-available {
+        color: #888;
+    }
+
+    .empty-state {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 45px 20px;
+        text-align: center;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .empty-state h4 {
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    .empty-state p {
+        color: #777;
+        margin-bottom: 0;
+    }
+</style>
+
+
+<div class="orders-page">
+
+    <!-- Page Header -->
+
+    <div class="page-header">
+
+        <h2>
+            My Orders
+        </h2>
+
+        <p>
+            View and manage the orders you have placed
+        </p>
+
+    </div>
+
+
+    @if (!Model.Any())
+    {
+        <!-- Empty State -->
+
+        <div class="empty-state">
+
+            <h4>
+                No Orders Yet
+            </h4>
+
+            <p>
+                You have not placed any orders yet.
+                Browse available gigs to get started.
+            </p>
+
+        </div>
+    }
+    else
+    {
+        <!-- Orders Table -->
+
+        <div class="orders-card">
+
+            <div class="table-responsive">
+
+                <table class="table orders-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Order ID
+                            </th>
+
+                            <th>
+                                Gig
+                            </th>
+
+                            <th>
+                                Buyer
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Review
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    <span class="order-id">
+                                        #@order.Id
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    <span class="gig-name">
+                                        @order.Gig.Title
+                                    </span>
+                                </td>
+
+
+                                <td>
+                                    <span class="buyer-name">
+                                        @order.Buyer.Name
+                                    </span>
+                                </td>
+
+
+                                <td>
+
+                                    @if (order.Status == "Pending")
+                                    {
+                                        <span class="status-badge status-pending">
+                                            Pending
+                                        </span>
+                                    }
+                                    else if (order.Status == "Completed")
+                                    {
+                                        <span class="status-badge status-completed">
+                                            Completed
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="status-badge status-cancelled">
+                                            Cancelled
+                                        </span>
+                                    }
+
+                                </td>
+
+
+                                <td>
+
+                                    @if (order.Status == "Completed")
+                                    {
+                                        <a href="/Reviews/Create?gigId=@order.GigId"
+                                           class="review-btn">
+                                            Leave Review
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span class="not-available">
+                                            Not Available
+                                        </span>
+                                    }
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    }
+
+</div>

@@ -1,0 +1,59 @@
+@model freelanceMarketplace.Models.Gig
+
+@{
+    ViewData["Title"] = "Gig Details";
+}
+
+<div class="container py-4">
+
+    <div class="mb-4">
+        <a href="/Gigs/List" class="text-decoration-none">
+            ← Back to All Gigs
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-body p-4">
+
+            <h1 class="mb-3">
+                @Model.Title
+            </h1>
+
+            <hr />
+
+            <div class="mb-4">
+                <h5>Description</h5>
+
+                <p class="text-muted">
+                    @Model.Description
+                </p>
+            </div>
+
+            <div class="mb-4">
+                <h5>Price</h5>
+
+                <h3>
+                    @Model.Price
+                </h3>
+            </div>
+
+            <div class="d-flex gap-2">
+
+                <a href="/Gigs/List"
+                   class="btn btn-secondary">
+                    Back to Gigs
+                </a>
+
+                <a href="/Orders/Create/@Model.Id"
+                   class="btn btn-dark">
+                    Place Order
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

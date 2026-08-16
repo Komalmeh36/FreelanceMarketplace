@@ -1,0 +1,199 @@
+@model freelanceMarketplace.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "User Login";
+}
+
+<style>
+    body {
+        background-color: #f3f3f3;
+    }
+
+    .login-page {
+        padding: 50px 0 60px 0;
+    }
+
+    .login-card {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 35px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.09);
+    }
+
+    .login-header {
+        margin-bottom: 28px;
+        text-align: center;
+    }
+
+    .login-header h2 {
+        margin: 0;
+        font-weight: 600;
+        color: #222;
+    }
+
+    .login-header p {
+        margin: 8px 0 0 0;
+        color: #666;
+    }
+
+    .form-group {
+        margin-bottom: 22px;
+    }
+
+    .form-label {
+        display: block;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        padding: 11px 12px;
+        color: #333;
+    }
+
+    .form-control:focus {
+        border-color: #555;
+        box-shadow: 0 0 0 0.15rem rgba(50, 50, 50, 0.12);
+    }
+
+    .login-btn {
+        width: 100%;
+        background-color: #333;
+        border-color: #333;
+        color: white;
+        padding: 11px;
+        border-radius: 6px;
+        font-weight: 500;
+    }
+
+    .login-btn:hover {
+        background-color: #222;
+        border-color: #222;
+        color: white;
+    }
+
+    .register-section {
+        margin-top: 25px;
+        padding-top: 20px;
+        border-top: 1px solid #e5e5e5;
+        text-align: center;
+        color: #666;
+    }
+
+    .register-link {
+        color: #222;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .register-link:hover {
+        text-decoration: underline;
+    }
+
+    .error-box {
+        border-radius: 7px;
+        margin-bottom: 20px;
+        border: none;
+    }
+</style>
+
+
+<div class="login-page">
+
+    <div class="login-card">
+
+        <!-- Login Header -->
+
+        <div class="login-header">
+
+            <h2>
+                User Login
+            </h2>
+
+            <p>
+                Sign in to your freelance marketplace account
+            </p>
+
+        </div>
+
+
+        <!-- Error Message -->
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger error-box">
+                @ViewBag.Error
+            </div>
+        }
+
+
+        <!-- Login Form -->
+
+        <form method="post">
+
+            <!-- Email -->
+
+            <div class="form-group">
+
+                <label asp-for="Email"
+                       class="form-label">
+                    Email
+                </label>
+
+                <input asp-for="Email"
+                       type="email"
+                       class="form-control"
+                       placeholder="Enter your email address" />
+
+            </div>
+
+
+            <!-- Password -->
+
+            <div class="form-group">
+
+                <label asp-for="Password"
+                       class="form-label">
+                    Password
+                </label>
+
+                <input asp-for="Password"
+                       type="password"
+                       class="form-control"
+                       placeholder="Enter your password" />
+
+            </div>
+
+
+            <!-- Login Button -->
+
+            <button type="submit"
+                    class="btn login-btn">
+                Login
+            </button>
+
+        </form>
+
+
+        <!-- Registration Link -->
+
+        <div class="register-section">
+
+            Don't have an account?
+
+            <a href="/Users/Register"
+               class="register-link">
+                Register here
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
