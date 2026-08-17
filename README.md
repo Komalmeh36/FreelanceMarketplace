@@ -75,7 +75,7 @@ The video demonstrates the application's user authentication, dashboard, gig man
 
 🏗️ Project Structure
 
-  text
+  '''text
 FreelanceMarketplace/
 │
 ├── Controllers/
