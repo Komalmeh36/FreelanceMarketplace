@@ -8,6 +8,14 @@ Freelance Marketplace is a full-stack web application developed to demonstrate t
 
 The application provides separate functionality for **Buyers** and **Sellers**, including user authentication, gig management, order management, and reviews.
 
+## 🎥 Project Demo
+
+Watch the complete Freelance Marketplace project walkthrough:
+
+▶️ [Watch the Demo Video on YouTube](https://youtu.be/d9QVF92um2E)
+
+The video demonstrates the application's user authentication, dashboard, gig management, order management, and other core features.
+
 ## ✨ Features
 
 ### 👤 User Management
@@ -106,127 +114,3 @@ FreelanceMarketplace/
 ├── Program.cs
 ├── appsettings.json
 └── freelanceMarketplace.csproj
-```
-
-## 🚀 How to Run the Project Locally
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/Komalmeh36/FreelanceMarketplace.git
-```
-
-### 2. Open the project
-
-```bash
-cd FreelanceMarketplace
-```
-
-### 3. Restore dependencies
-
-```bash
-dotnet restore
-```
-
-### 4. Apply database migrations
-
-```bash
-dotnet ef database update
-```
-
-If Entity Framework CLI is not installed:
-
-```bash
-dotnet tool install --global dotnet-ef
-```
-
-### 5. Run the application
-
-```bash
-dotnet run
-```
-
-The application will provide a local URL in the terminal, such as:
-
-```text
-http://localhost:xxxx
-```
-
-Open that URL in your browser.
-
-## 🔐 User Roles
-
-### Buyer
-
-A Buyer can:
-
-* Browse available gigs
-* Search for gigs
-* Place orders
-* View personal orders
-* Track order status
-* Leave reviews after completed orders
-
-### Seller
-
-A Seller can:
-
-* Create gigs
-* View gigs
-* Edit gigs
-* Delete gigs
-* Manage orders
-* Complete or cancel orders
-
-## 🗃️ Database
-
-The application uses **SQLite** with **Entity Framework Core** for data storage.
-
-The database contains information related to:
-
-* Users
-* Gigs
-* Orders
-* Reviews
-
-Database migrations are included in the `Migrations` folder.
-
-## 🎯 Purpose of the Project
-
-This project was developed as a practical **ASP.NET Core MVC** application to demonstrate:
-
-* MVC architecture
-* CRUD operations
-* Entity Framework Core
-* Database relationships
-* Role-based application behavior
-* Session-based user authentication
-* Form handling
-* Razor Views
-* Git and GitHub workflow
-
-## 📸 Screenshots
-
-Screenshots of the application can be added here to demonstrate:
-
-* Login
-* Dashboard
-* Gig listing
-* Create Gig
-* Orders
-* My Orders
-* Reviews
-* User management
-
-## 🔗 Repository
-
-GitHub:
-
-https://github.com/Komalmeh36/FreelanceMarketplace
-
-## 👩‍💻 Author
-
-**Komal Mehmood**
-
-BS Software Engineering
-Riphah International University
