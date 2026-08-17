@@ -112,5 +112,17 @@ FreelanceMarketplace/
 │   └── lib/
 │
 ├── Program.cs
+## 🔗 Project Links
+
+* 💻 [GitHub Repository](https://github.com/Komalmeh36/FreelanceMarketplace)
+* 🎥 [Project Demo Video on YouTube](https://youtu.be/d9QVF92um2E)
+* 🌐 **Live Demo:** Coming soon
+
+## 👩‍💻 Author
+
+**Komal Mehmood**
+
+BS Software Engineering  
+Riphah International University
 ├── appsettings.json
 └── freelanceMarketplace.csproj
