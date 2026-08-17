@@ -73,9 +73,9 @@ The video demonstrates the application's user authentication, dashboard, gig man
 * **Visual Studio Code**
 * **Git & GitHub**
 
-## 🏗️ Project Structure
+🏗️ Project Structure
 
-```text
+  text
 FreelanceMarketplace/
 │
 ├── Controllers/
@@ -114,8 +114,8 @@ FreelanceMarketplace/
 ├── Program.cs
 ## 🔗 Project Links
 
-* 💻 [GitHub Repository](https://github.com/Komalmeh36/FreelanceMarketplace)
-* 🎥 [Project Demo Video on YouTube](https://youtu.be/d9QVF92um2E)
+* 💻 GitHub Repository https://github.com/Komalmeh36/FreelanceMarketplace
+* 🎥 Project Demo Video on YouTube https://youtu.be/d9QVF92um2E
 * 🌐 **Live Demo:** Coming soon
 
 ## 👩‍💻 Author
