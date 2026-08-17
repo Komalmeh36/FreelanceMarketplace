@@ -75,7 +75,8 @@ The video demonstrates the application's user authentication, dashboard, gig man
 
 🏗️ Project Structure
 
-  '''text
+
+```text
 FreelanceMarketplace/
 │
 ├── Controllers/
@@ -112,6 +113,9 @@ FreelanceMarketplace/
 │   └── lib/
 │
 ├── Program.cs
+├── appsettings.json
+└── freelanceMarketplace.csproj
+
 ## 🔗 Project Links
 
 * 💻 GitHub Repository https://github.com/Komalmeh36/FreelanceMarketplace
